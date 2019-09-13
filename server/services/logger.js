@@ -2,8 +2,12 @@ const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, printf, errors, colorize, metadata } = format;
 
 const customFormat = printf(({ level, message, metadata }) => {
-  let error = metadata.error ? ': ' + metadata.error.stack : '';
-  return `(${metadata.timestamp}) - [${level}] ${message}${error}`
+  const { name, body } = message;
+  const messageWithName = `${name}: ${body}`;
+  let error = metadata.error ? ':\n' + metadata.error.stack: '';
+  let messageBody = name ? messageWithName : message;
+
+  return `(${metadata.timestamp}) - [${level}] ${messageBody}${error}`
 });
 
 const logger = createLogger({
@@ -22,7 +26,7 @@ const logger = createLogger({
     }),
   ],
   format: combine(
-    timestamp({ format: 'YYYY-MMM-D hh:mm:ss' }),
+    timestamp({ format: 'YYYY-MMM-D hh:mm:ss:SSS' }),
     metadata(),
     customFormat,
   )

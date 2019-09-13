@@ -1,6 +1,7 @@
 const sql = require('../services/sql');
 const logger = require('../services/logger');
 const constants = require('../consts');
+const dropAllTables = require('./drop-tables');
 
 const db = require('../migrations/base/database');
 const user = require('../migrations/base/user');
@@ -27,6 +28,8 @@ async function runMigrations() {
     logger.info('Migrations executed successfully')
   } catch (error) {
     logger.error(constants.error.runMigrations, { error });
+    logger.warn('Performing rollback due to migration fail...');
+    dropAllTables();
   }
 }
 
