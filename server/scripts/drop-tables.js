@@ -6,9 +6,7 @@ const tables = ['game', 'user', 'followed_game'];
 
 async function dropAllTables() {
   // Warning: use this function with caution
-  const dropTableQueries = tables.map((table) => {
-    return sql.runQuery(`DROP TABLE IF EXISTS ${table}`);
-  });
+  const dropTableQueries = tables.map((table) => sql.runQuery(`DROP TABLE IF EXISTS ${table}`));
 
   try {
     await Promise.all(dropTableQueries);
