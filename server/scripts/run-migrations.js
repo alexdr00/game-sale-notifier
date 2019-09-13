@@ -1,5 +1,6 @@
 const sql = require('../services/sql');
 const logger = require('../services/logger');
+const constants = require('../consts');
 
 const db = require('../migrations/base/database');
 const user = require('../migrations/base/user');
@@ -25,7 +26,7 @@ async function runMigrations() {
 
     logger.info('Migrations executed successfully')
   } catch (error) {
-    logger.error('Something wrong went creating the db migrations', { detail: error });
+    logger.error(constants.error.runMigrations, { error });
   }
 }
 
