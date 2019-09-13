@@ -1,7 +1,10 @@
-const express = require('express');
-const server = express();
 require('dotenv').config();
+const express = require('express');
+const logger = require('./services/logger');
 
-server.listen(3000, () => {
-  console.log('boiler plate server listening');
+const server = express();
+
+const port = process.env.SERVER_PORT;
+server.listen(port, () => {
+  logger.info(`Server running on port ${port}`);
 });
