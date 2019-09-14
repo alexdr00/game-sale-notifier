@@ -1,19 +1,24 @@
 const sql = require('../services/sql');
 const logger = require('../services/logger');
-const constants = require('../consts');
 
-const tables = ['game', 'user', 'followed_game'];
-
-async function dropAllTables() {
-  // Warning: use this function with caution
-  const dropTableQueries = tables.map((table) => sql.runQuery(`DROP TABLE IF EXISTS ${table}`));
-
+// This functions should only be used to execute a rollback in case the migrations or seeds fail.
+// Or to cleanup database before running seeds.
+async function dropTable(table) {
+  const dropTableQuery = `DROP TABLE IF EXISTS ${table}`;
   try {
-    await Promise.all(dropTableQueries);
-    logger.info('All tables were dropped successfully.');
+    await sql.runQuery(dropTableQuery);
   } catch (error) {
-    logger.error(constants.error.dropAllTables, { error });
+    logger.error(`Error dropping table: ${table}`, { error });
+    process.exit(1);
   }
 }
 
-module.exports = dropAllTables;
+async function dropAllTables() {
+  logger.info('Cleaning up database dropping all tables...');
+  await dropTable('followed_game');
+  await dropTable('game');
+  await dropTable('user');
+  logger.info('All tables were dropped sucessfully.');
+}
+
+module.exports = { dropAllTables, dropTable };

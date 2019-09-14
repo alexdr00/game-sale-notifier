@@ -5,7 +5,7 @@ class Sql {
     this.connection = this.establishConnection();
   }
 
-  static establishConnection() {
+  establishConnection() {
     return mysql.createPool({
       connectionLimit: 10,
       host: process.env.MYSQL_HOST,
@@ -25,6 +25,27 @@ class Sql {
         resolve();
       });
     });
+  }
+
+  async insertInto(table, objects) {
+    const entries = objects.map((object) => {
+      const keys = Object.keys(object).join(', ');
+      let values = Object.values(object);
+      values = values.map((value) => {
+        if (typeof value === 'string') {
+          return `'${value}'`;
+        }
+
+        return value;
+      });
+      values = values.join(', ');
+      return { keys, values };
+    });
+
+    const queries = entries.map(({ keys, values }) => `INSERT INTO ${table} (${keys}) VALUES (${values});`);
+    const executedQueries = queries.map((query) => this.runQuery(query));
+
+    await Promise.all(executedQueries);
   }
 
   runQuery(query) {

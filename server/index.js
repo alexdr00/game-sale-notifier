@@ -1,10 +1,16 @@
 require('dotenv').config();
 const express = require('express');
-const logger = require('./services/logger');
+const d = require('./scripts/setup-database');
+
+(async () => {
+  await d();
+
+})()
 
 const server = express();
 
-const port = process.env.SERVER_PORT;
-server.listen(port, () => {
-  logger.info(`Server running on port ${port}`);
-});
+
+// const port = process.env.SERVER_PORT;
+// server.listen(port, () => {
+//   logger.info(`Server running on port ${port}`);
+// });
