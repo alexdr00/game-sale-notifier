@@ -1,10 +1,17 @@
 require('dotenv').config();
-const express = require('express');
+const server = require('./lib/server');
+const logger = require('./services/logger');
 
-const server = express();
+const { app } = server;
 
 
-// const port = process.env.SERVER_PORT;
-// server.listen(port, () => {
-//   logger.info(`Server running on port ${port}`);
-// });
+const PORT = process.env.SERVER_PORT || 5000;
+
+app.listen(PORT, (error) => {
+  if (error) {
+    logger.error('Couldn\'t start server', { error });
+    process.exit(1);
+  }
+
+  logger.info(`Server is listening on port ${PORT}`);
+});
