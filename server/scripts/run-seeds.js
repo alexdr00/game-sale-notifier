@@ -4,6 +4,7 @@ const sql = require('../services/sql');
 const games = require('../seeds/games');
 const users = require('../seeds/user');
 const followedGames = require('../seeds/followed-game');
+const priceHistory = require('../seeds/price-history');
 
 const { dropTable } = require('./drop-tables');
 
@@ -23,6 +24,7 @@ async function runAllSeeds() {
   await runSeedsFor('game', games);
   await runSeedsFor('user', users);
   await runSeedsFor('followed_game', followedGames);
+  await runSeedsFor('price_history', priceHistory);
   logger.info('All seeds inserted successfully.');
 }
 

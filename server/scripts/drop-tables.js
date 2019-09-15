@@ -16,6 +16,7 @@ async function dropTable(table) {
 async function dropAllTables() {
   logger.info('Cleaning up database dropping all tables...');
   await dropTable('followed_game');
+  await dropTable('price_history');
   await dropTable('game');
   await dropTable('user');
   logger.info('All tables were dropped sucessfully.');
