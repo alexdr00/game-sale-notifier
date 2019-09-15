@@ -4,7 +4,8 @@
   "description": "Server for game sale notifier app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup-database": "node -r dotenv/config scripts/setup-database.js"
   },
   "author": "Alexander Dominguez",
   "license": "MIT",

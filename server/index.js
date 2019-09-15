@@ -1,11 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const d = require('./scripts/setup-database');
-
-(async () => {
-  await d();
-
-})()
 
 const server = express();
 

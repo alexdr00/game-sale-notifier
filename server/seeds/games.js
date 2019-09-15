@@ -1,5 +1,6 @@
 const games = [
   {
+    game_id: 1,
     igdb_key: 1942,
     game_name: 'The Witcher 3: Wild Hunt',
     current_price: 47.99,
@@ -8,6 +9,7 @@ const games = [
     psn_store_url: 'https://store.playstation.com/es-co/product/UP4497-CUSA00527_00-0000000000000002',
   },
   {
+    game_id: 2,
     igdb_key: 9498,
     game_name: 'Deus Ex: Mankind Divided',
     current_price: 35.99,

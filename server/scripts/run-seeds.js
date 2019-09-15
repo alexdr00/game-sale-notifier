@@ -6,12 +6,15 @@ const users = require('../seeds/user');
 const followedGames = require('../seeds/followed-game');
 const priceHistory = require('../seeds/price-history');
 
-const { dropTable } = require('./drop-tables');
+const dropTable = require('./drop-tables');
 
 async function runSeedsFor(table, data) {
   try {
     await sql.insertInto(table, data);
   } catch (error) {
+    if (error.code === 'ER_DUP_ENTRY') {
+      return;
+    }
     logger.error(`Failed running seeds for table: ${table}`, { error });
     logger.warn('Performing rollback due to seed failure...');
     dropTable(table);

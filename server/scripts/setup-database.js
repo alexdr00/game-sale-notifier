@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 
 const logger = require('../services/logger');
-const { dropAllTables } = require('./drop-tables.js');
 const runAllSeeds = require('./run-seeds');
 const runMigrations = require('./run-migrations');
 const db = require('../migrations/base/database');
@@ -31,10 +30,10 @@ function createDatabase() {
 async function setupDatabase() {
   logger.info('*** Setting up database ***');
   await createDatabase();
-  await dropAllTables();
   await runMigrations();
   await runAllSeeds();
   logger.info('*** Database set up successfully ***');
+  process.exit(0);
 }
 
-module.exports = setupDatabase;
+setupDatabase();
