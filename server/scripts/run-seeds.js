@@ -1,5 +1,5 @@
-const logger = require('../services/logger');
-const sql = require('../services/sql');
+const logger = require('../src/services/logger');
+const sql = require('../src/services/sql');
 
 const games = require('../seeds/games');
 const users = require('../seeds/user');

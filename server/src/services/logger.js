@@ -13,15 +13,17 @@ const customFormat = printf(({ level, message, metadata: meta }) => {
   return `(${meta.timestamp}) - [${level}] ${messageBody}${error}`;
 });
 
+const logsPath = `${__dirname}/../../logs`;
+
 const logger = createLogger({
   level: 'info',
   transports: [
     new transports.File({
-      filename: `${__dirname}/../logs/info.log`,
+      filename: `${logsPath}/info.log`,
       level: 'info',
     }),
     new transports.File({
-      filename: `${__dirname}/../logs/errors.log`,
+      filename: `${logsPath}/errors.log`,
       level: 'error',
       format: combine(
         errors({ stack: true }),
@@ -43,7 +45,7 @@ if (!isProductionEnv) {
     ),
   }));
   logger.add(new transports.File({
-    filename: `${__dirname}/../logs/debug.log`,
+    filename: `${logsPath}/debug.log`,
     level: 'debug',
     format: combine(
       customFormat,

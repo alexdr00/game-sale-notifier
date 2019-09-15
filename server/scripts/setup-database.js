@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-const logger = require('../services/logger');
+const logger = require('../src/services/logger');
 const runAllSeeds = require('./run-seeds');
 const runMigrations = require('./run-migrations');
 const db = require('../migrations/base/database');

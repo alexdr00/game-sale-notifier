@@ -1,5 +1,5 @@
-const sql = require('../services/sql');
-const logger = require('../services/logger');
+const sql = require('../src/services/sql');
+const logger = require('../src/services/logger');
 const constants = require('../consts');
 
 const user = require('../migrations/base/user');

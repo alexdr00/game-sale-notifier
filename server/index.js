@@ -1,6 +1,6 @@
 require('dotenv').config();
-const server = require('./lib/server');
-const logger = require('./services/logger');
+const server = require('./src/server');
+const logger = require('./src/services/logger');
 
 const { app } = server;
 

@@ -1,5 +1,5 @@
-const sql = require('../services/sql');
-const logger = require('../services/logger');
+const sql = require('../src/services/sql');
+const logger = require('../src/services/logger');
 
 // This function should only be used to execute a rollback in case the migrations or seeds fail.
 async function dropTable(table) {
