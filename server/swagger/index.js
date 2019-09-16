@@ -1,28 +1,27 @@
+const auth = require('./auth');
+const { userPaths, userSchema } = require('./user');
+
 module.exports = {
-  openapi: '3.0.0',
+  swagger: '2.0',
   info: {
     version: '1.0.0',
-    title: 'Seans-TypeScript-NodeJS-CRUD-REST-API-Boilerplate',
-    description: 'A minimal and easy to follow example of what you need to create a CRUD style API in NodeJs using TypeScript',
+    title: 'GSN (Game Sale Notifier) API',
+    description: 'This is the API for the GSN application',
     license: {
       name: 'MIT',
       url: 'https://opensource.org/licenses/MIT',
     },
   },
-  servers: [
-    {
-      url: '/',
-      description: 'Local Dev, or from Heroku',
-    },
-    {
-      url: '/api/',
-      description: 'With docker-compose and nginx proxy',
-    },
-  ],
+  basePath: '/v1',
   tags: [
     {
-      name: 'Cats',
-      description: 'API for cats in the system',
+      name: 'auth',
+    },
+    {
+      name: 'user',
+    },
+    {
+      name: 'game',
     },
   ],
   consumes: [
@@ -31,4 +30,11 @@ module.exports = {
   produces: [
     'application/json',
   ],
+  paths: {
+    ...auth,
+    ...userPaths,
+  },
+  models: {
+    ...userSchema,
+  },
 };
