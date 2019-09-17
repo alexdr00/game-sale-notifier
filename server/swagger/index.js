@@ -2,6 +2,7 @@ const auth = require('./auth');
 const { userPaths, userSchema } = require('./user');
 const { gameSchema, gamePaths } = require('./game');
 const messageSchema = require('./message');
+const { priceHistorySchema, priceHistoryPaths } = require('./price-history');
 
 module.exports = {
   swagger: '2.0',
@@ -25,6 +26,9 @@ module.exports = {
     {
       name: 'game',
     },
+    {
+      name: 'price-history',
+    },
   ],
   consumes: [
     'application/json',
@@ -36,10 +40,12 @@ module.exports = {
     ...auth,
     ...userPaths,
     ...gamePaths,
+    ...priceHistoryPaths,
   },
   models: {
     ...userSchema,
     ...gameSchema,
     ...messageSchema,
+    ...priceHistorySchema,
   },
 };

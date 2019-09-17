@@ -10,7 +10,7 @@ const gameSchema = {
       igdb_key: {
         type: 'integer',
         example: 1992,
-        description: 'Id that figures in the IGDB database'
+        description: 'Id that figures in the IGDB database',
       },
       game_name: {
         type: 'string',
@@ -37,6 +37,22 @@ const gameSchema = {
 };
 
 const gamePaths = {
+  '/game/all': {
+    get: {
+      tags: ['game'],
+      summary: 'gets all games',
+      responses: {
+        200: {
+          schema: {
+            items: {
+              $ref: '#/models/Game',
+            },
+          },
+        },
+      },
+    },
+  },
+
   '/game/{gameId}': {
     get: {
       tags: ['game'],
@@ -110,7 +126,7 @@ const gamePaths = {
           },
         },
       },
-    }
+    },
   },
 
   '/game': {
@@ -164,7 +180,62 @@ const gamePaths = {
         },
       },
     },
-  }
+  },
+
+  '/game/search?query={gameName}': {
+    get: {
+      tags: ['game'],
+      summary: 'Performs a search of games',
+      parameters: [
+        {
+          name: 'query',
+          in: 'query',
+          type: 'string',
+          required: true,
+        },
+      ],
+      responses: {
+        200: {
+          schema: {
+            items: {
+              $ref: '#/models/Game',
+            },
+          },
+        },
+      },
+    },
+  },
+
+  '/game/{gameId}/followedBy/{userId}': {
+    get: {
+      tags: ['game'],
+      summary: 'Gets all games that are being followed by certain an user',
+      responses: {
+        200: {
+          schema: {
+            items: {
+              $ref: '#/models/Game',
+            },
+          },
+        },
+      },
+    },
+  },
+
+  '/game/{gameId}/purchaseBy/{userId}': {
+    patch: {
+      tags: ['game'],
+      summary: 'Changes the "has_been_purchased" flaw to true',
+      responses: {
+        200: {
+          schema: {
+            description: 'purchased game',
+            $ref: '#/models/Game',
+          },
+        },
+      },
+    },
+  },
 };
 
 module.exports = { gameSchema, gamePaths };

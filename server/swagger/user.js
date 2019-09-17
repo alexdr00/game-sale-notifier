@@ -122,6 +122,32 @@ const userPaths = {
       },
     },
   },
+
+  '/user/{userId}/follow/{gameId}': {
+    post: {
+      tags: ['user'],
+      summary: 'starts following a game with an user',
+      responses: {
+        200: {
+          schema: {
+            $ref: '#/models/Message',
+          },
+        },
+      },
+    },
+
+    delete: {
+      tags: ['user'],
+      summary: 'stops following a game with an user',
+      responses: {
+        200: {
+          schema: {
+            $ref: '#/models/Message',
+          },
+        },
+      },
+    },
+  },
 };
 
 module.exports = { userPaths, userSchema };
