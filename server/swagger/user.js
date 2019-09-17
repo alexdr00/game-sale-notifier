@@ -68,6 +68,33 @@ const userPaths = {
   '/user/{userId}/preferences': {
     patch: {
       summary: 'update user preferences',
+      parameters: [
+        {
+          name: 'region_iso',
+          in: 'formData',
+          type: 'string',
+        },
+        {
+          name: 'currency_type',
+          in: 'formData',
+          type: 'string',
+        },
+        {
+          name: 'loading_animation_type',
+          in: 'formData',
+          type: 'integer',
+        },
+        {
+          name: 'budget',
+          in: 'formData',
+          type: 'integer',
+        },
+        {
+          name: 'language',
+          in: 'formData',
+          type: 'string',
+        },
+      ],
       tags: ['user'],
       responses: {
         200: {

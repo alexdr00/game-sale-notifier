@@ -1,5 +1,7 @@
 const auth = require('./auth');
 const { userPaths, userSchema } = require('./user');
+const { gameSchema, gamePaths } = require('./game');
+const messageSchema = require('./message');
 
 module.exports = {
   swagger: '2.0',
@@ -33,8 +35,11 @@ module.exports = {
   paths: {
     ...auth,
     ...userPaths,
+    ...gamePaths,
   },
   models: {
     ...userSchema,
+    ...gameSchema,
+    ...messageSchema,
   },
 };
