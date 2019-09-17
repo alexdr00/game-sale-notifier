@@ -23,7 +23,7 @@ class Server {
     router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
     router.use('/health', (req, res) => res.send({ message: 'ok' }));
 
-    this.app.use('/', router);
+    this.app.use('/v1', router);
   }
 }
 
