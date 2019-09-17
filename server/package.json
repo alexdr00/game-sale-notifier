@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "start-watch": "node_modules/.bin/nodemon index.js",
-    "setup-database": "node -r dotenv/config scripts/setup-database.js"
+    "start:watch": "node_modules/.bin/nodemon index.js",
+    "database:setup": "node -r dotenv/config scripts/setup-database.js"
   },
   "author": "Alexander Dominguez",
   "license": "MIT",
