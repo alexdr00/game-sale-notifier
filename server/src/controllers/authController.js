@@ -1,6 +1,7 @@
 const userRepository = require('../repositories/userRepo');
-const baseController = require('./BaseController');
+const baseController = require('./baseController');
 const constants = require('../../consts');
+const validations = require('../validations');
 
 class AuthController {
   async login(req, res) {
@@ -9,19 +10,32 @@ class AuthController {
       const result = await userRepository.findByEmail(email);
       const user = result[0];
 
-      if (!user) {
-        const error = {
-          message: constants.error.userNotFound.body,
-          statusCode: 404,
-        };
-        throw error;
-      }
+      validations.validateUserExistence(user);
 
       baseController.handleSuccess(res, user);
     } catch (error) {
       baseController.handleFailure(res, {
         error,
         details: constants.error.userLogin,
+      });
+    }
+  }
+
+  async register(req, res) {
+    const { email, password } = req.body;
+    try {
+      const result = await userRepository.findByEmail(email);
+      const user = result[0];
+
+      validations.validateUserUniqueness(user);
+      validations.validateEmail(email);
+      validations.validatePassword(password);
+
+      baseController.handleSuccess(res, { nice: 'nice' }, 201);
+    } catch (error) {
+      baseController.handleFailure(res, {
+        error,
+        details: constants.error.userRegister,
       });
     }
   }

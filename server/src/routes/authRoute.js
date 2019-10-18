@@ -8,7 +8,8 @@ class AuthRouter {
   }
 
   mountRoutes() {
-    this.router.post('/register', authController.login);
+    this.router.post('/login', authController.login);
+    this.router.post('/register', authController.register);
   }
 }
 

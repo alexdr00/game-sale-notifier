@@ -20,5 +20,17 @@ module.exports = {
       name: 'userNotFound',
       body: 'user email and/or password is incorrect',
     },
+    userAlreadyExists: {
+      name: 'userAlreadyExists',
+      body: 'An user with that email already exists.',
+    },
+    invalidEmail: {
+      name: 'invalidEmail',
+      body: 'That email is invalid.',
+    },
+    invalidPassword: {
+      name: 'invalidPassword',
+      body: 'That password is not strong enough.',
+    },
   },
 };
