@@ -25,7 +25,7 @@ async function runSeedsFor(table, data) {
 async function runAllSeeds() {
   // This function is meant to be executed after db cleanup (dropping all tables)
   await runSeedsFor('game', games);
-  await runSeedsFor('user', users);
+  await runSeedsFor('userRepo.js', users);
   await runSeedsFor('followed_game', followedGames);
   await runSeedsFor('price_history', priceHistory);
   logger.info('All seeds inserted successfully.');

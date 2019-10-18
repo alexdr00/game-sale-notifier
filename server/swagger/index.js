@@ -18,10 +18,10 @@ module.exports = {
   basePath: '/v1',
   tags: [
     {
-      name: 'auth',
+      name: 'authRoute.js',
     },
     {
-      name: 'user',
+      name: 'userRepo.js',
     },
     {
       name: 'game',

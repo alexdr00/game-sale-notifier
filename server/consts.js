@@ -8,5 +8,17 @@ module.exports = {
       name: 'dropAllTables',
       body: 'Something went wrong dropping all tables',
     },
+    userRegister: {
+      name: 'userRegister',
+      body: 'An error occurred registering the user.',
+    },
+    userLogin: {
+      name: 'userLogin',
+      body: 'An error occurred logging in the user.',
+    },
+    userNotFound: {
+      name: 'userNotFound',
+      body: 'user email and/or password is incorrect',
+    },
   },
 };

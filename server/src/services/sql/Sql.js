@@ -48,9 +48,9 @@ class Sql {
     await Promise.all(executedQueries);
   }
 
-  runQuery(query) {
+  runQuery(query, parameters = []) {
     return new Promise((resolve, reject) => {
-      this.connection.query(query, (error, result) => {
+      this.connection.query(query, parameters, (error, result) => {
         if (error) {
           reject(error);
         }

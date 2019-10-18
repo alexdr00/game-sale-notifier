@@ -1,7 +1,7 @@
 module.exports = {
   '/login': {
     post: {
-      tags: ['auth'],
+      tags: ['authRoute.js'],
       summary: 'user login',
       parameters: [
         {
@@ -30,7 +30,7 @@ module.exports = {
 
   '/signup': {
     post: {
-      tags: ['auth'],
+      tags: ['authRoute.js'],
       summary: 'register user',
       parameters: [
         {
@@ -65,7 +65,7 @@ module.exports = {
 
   '/logout': {
     post: {
-      tags: ['auth'],
+      tags: ['authRoute.js'],
       summary: 'logout user',
       parameters: [
         {

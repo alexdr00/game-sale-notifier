@@ -45,7 +45,7 @@ const userSchema = {
 const userPaths = {
   '/user/{userId}': {
     get: {
-      tags: ['user'],
+      tags: ['userRepo.js'],
       summary: 'get user by id',
       parameters: [
         {
@@ -95,7 +95,7 @@ const userPaths = {
           type: 'string',
         },
       ],
-      tags: ['user'],
+      tags: ['userRepo.js'],
       responses: {
         200: {
           description: 'updated user',
@@ -109,7 +109,7 @@ const userPaths = {
 
   '/user/all': {
     get: {
-      tags: ['user'],
+      tags: ['userRepo.js'],
       summary: 'get all users',
       responses: {
         200: {
@@ -125,7 +125,7 @@ const userPaths = {
 
   '/user/{userId}/follow/{gameId}': {
     post: {
-      tags: ['user'],
+      tags: ['userRepo.js'],
       summary: 'starts following a game with an user',
       responses: {
         200: {
@@ -137,7 +137,7 @@ const userPaths = {
     },
 
     delete: {
-      tags: ['user'],
+      tags: ['userRepo.js'],
       summary: 'stops following a game with an user',
       responses: {
         200: {
