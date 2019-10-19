@@ -2,7 +2,7 @@ const crypto = require('crypto');
 
 class PasswordSecurity {
   constructor() {
-    // Never ever touch this value.
+    // Don't touch this value
     this.saltLength = 16;
   }
 
@@ -14,9 +14,17 @@ class PasswordSecurity {
   }
 
   generateHash(password, salt) {
-    const hash = crypto.createHmac('sha512', salt);
-    hash.update(password);
-    const passwordHashed = hash.digest('hex');
+    const ITERATION_COUNT = 10000;
+    const KEYLEN = 64;
+    const DIGEST = 'sha512';
+    const hashBuffer = crypto.pbkdf2Sync(
+      password,
+      salt,
+      ITERATION_COUNT,
+      KEYLEN,
+      DIGEST,
+    );
+    const passwordHashed = hashBuffer.toString('hex');
     return passwordHashed + salt;
   }
 
