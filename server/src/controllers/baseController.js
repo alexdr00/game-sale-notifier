@@ -1,10 +1,15 @@
 const logger = require('../services/logger');
 
 class BaseController {
-  handleSuccess(res, response, statusCode = 200) {
-    res.status(statusCode).json({
-      data: response,
-    });
+  handleSuccess(res, payload, message, statusCode = 200) {
+    let response = {};
+    if (payload) {
+      response = { data: payload };
+    }
+    if (typeof message !== 'undefined' && message !== null) {
+      response = { ...response, message };
+    }
+    res.status(statusCode).json(response);
   }
 
   handleFailure(res, failure) {

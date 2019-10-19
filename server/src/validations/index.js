@@ -1,20 +1,21 @@
 const constants = require('../../consts');
+const passwordSecurity = require('../services/passwordSecurity');
 
 const emailRegexValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const passwordRegexValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
-class Validations {
-  validateUserExistence(user) {
+class Validate {
+  userExistence(user) {
     if (!user) {
       const error = {
-        message: constants.error.userNotFound.body,
-        statusCode: 404,
+        message: constants.error.incorrectCredentials.body,
+        statusCode: 401,
       };
       throw error;
     }
   }
 
-  validateUserUniqueness(user) {
+  userUniqueness(user) {
     if (user) {
       const error = {
         message: constants.error.userAlreadyExists.body,
@@ -24,7 +25,7 @@ class Validations {
     }
   }
 
-  validateEmail(email) {
+  emailCorrectness(email) {
     const isEmailValid = emailRegexValidator.test(email);
     if (!isEmailValid) {
       const error = {
@@ -35,7 +36,28 @@ class Validations {
     }
   }
 
-  validatePassword(password) {
+  passwordsMatch(submittedPassword, storedPassword) {
+    const doesPasswordMatch = passwordSecurity.match(submittedPassword, storedPassword);
+    if (!doesPasswordMatch) {
+      const error = {
+        message: constants.error.incorrectCredentials.body,
+        statusCode: 401,
+      };
+      throw error;
+    }
+  }
+
+  fieldExists(field, fieldName) {
+    if (typeof field === 'undefined' || field === null) {
+      const error = {
+        message: `${constants.error.fieldRequired.body}${fieldName}`,
+        statusCode: 400,
+      };
+      throw error;
+    }
+  }
+
+  passwordStrength(password) {
     const isPasswordValid = passwordRegexValidator.test(password);
     if (!isPasswordValid) {
       const error = {
@@ -48,4 +70,4 @@ class Validations {
 }
 
 
-module.exports = new Validations();
+module.exports = new Validate();

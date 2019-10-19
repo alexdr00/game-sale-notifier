@@ -16,8 +16,8 @@ module.exports = {
       name: 'userLogin',
       body: 'An error occurred logging in the user.',
     },
-    userNotFound: {
-      name: 'userNotFound',
+    incorrectCredentials: {
+      name: 'incorrectCredentials',
       body: 'user email and/or password is incorrect',
     },
     userAlreadyExists: {
@@ -32,5 +32,16 @@ module.exports = {
       name: 'invalidPassword',
       body: 'That password is not strong enough.',
     },
+    passwordRequired: {
+      name: 'passwordRequired',
+      body: 'The password is required.',
+    },
+    fieldRequired: {
+      name: 'fieldRequired',
+      body: 'Field required: ',
+    },
+  },
+  success: {
+    register: 'User registered successfully.',
   },
 };
