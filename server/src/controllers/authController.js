@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const userRepository = require('../repositories/userRepo');
 const baseController = require('./baseController');
 const constants = require('../../consts');
@@ -17,11 +18,10 @@ class AuthController {
       validate.userExistence(user);
       validate.passwordsMatch(password, user.password);
 
-      const payload = {
-        email: user.email,
-        userId: user.userId,
-      };
-      baseController.handleSuccess(res, payload);
+      const payload = { userId: user.userId };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+
+      res.header('Authorization', token).json({ token });
     } catch (error) {
       baseController.handleFailure(res, {
         error,
@@ -51,8 +51,10 @@ class AuthController {
       });
 
       const message = constants.success.register;
-      const payload = { email, userId: result.insertId };
-      baseController.handleSuccess(res, payload, message, 201);
+      const payload = { userId: result.insertId };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+
+      res.header('Authorization', token).json({ token, message });
     } catch (error) {
       baseController.handleFailure(res, {
         error,

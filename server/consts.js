@@ -40,6 +40,14 @@ module.exports = {
       name: 'fieldRequired',
       body: 'Field required: ',
     },
+    unauthorized: {
+      name: 'unauthorized',
+      body: 'You are not authorized.',
+    },
+    invalidToken: {
+      name: 'invalidToken',
+      body: 'The provided auth token is not valid.',
+    },
   },
   success: {
     register: 'User registered successfully.',
