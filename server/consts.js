@@ -60,9 +60,26 @@ module.exports = {
       name: 'unableToUpdateBudget',
       body: 'Unable to update budget.',
     },
+    unableToSearchGame: {
+      name: 'unableToSearchGame',
+      body: 'Unable to search the game.',
+    },
+    unableToFollowGame: {
+      name: 'unableToFollowGame',
+      body: 'Unable to follow the game.',
+    },
+    gameNotFoundInPsn: {
+      name: 'gameNotFoundInPsn',
+      body: 'Game not found in PSN: ',
+    },
+    unableToGetPrice: {
+      name: 'unableToGetPrice',
+      body: 'Unable to get the price for this game directly from PSN.',
+    },
   },
   success: {
     register: 'User registered successfully.',
     updateBudget: 'Budget set successfully.',
+    followGame: 'Great! Now your following this game.',
   },
 };
