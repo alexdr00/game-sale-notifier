@@ -17,11 +17,21 @@ class UserRepo {
     return sql.runQuery(`
       SELECT 
         user_id as "userId",
-        email
+        email,
+        budget
       FROM user
       WHERE user_id = ?;  
     `,
     [userId]);
+  }
+
+  updateBudget(userId, budget) {
+    return sql.runQuery(`
+      UPDATE user
+      SET budget = ?
+      WHERE user_id = ?;
+    `,
+    [budget, userId]);
   }
 
   create(user) {

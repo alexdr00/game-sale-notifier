@@ -67,6 +67,16 @@ class Validate {
       throw error;
     }
   }
+
+  budgetIsNumber(budget) {
+    if (Number.isNaN(Number(budget))) {
+      const error = {
+        message: constants.error.invalidPassword.body,
+        statusCode: 400,
+      };
+      throw error;
+    }
+  }
 }
 
 

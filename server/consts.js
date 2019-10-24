@@ -48,8 +48,21 @@ module.exports = {
       name: 'invalidToken',
       body: 'The provided auth token is not valid.',
     },
+    retrieveUser: {
+      name: 'retrieveUser',
+      body: 'Unable to retrieve the specified user.',
+    },
+    invalidBudget: {
+      name: 'invalidBudget',
+      body: 'Invalid value for budget.',
+    },
+    unableToUpdateBudget: {
+      name: 'unableToUpdateBudget',
+      body: 'Unable to update budget.',
+    },
   },
   success: {
     register: 'User registered successfully.',
+    updateBudget: 'Budget set successfully.',
   },
 };

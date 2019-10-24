@@ -2,7 +2,8 @@ const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const bodyParser = require('body-parser');
 const swaggerConfig = require('../swagger');
-const authRouter = require('./routes/authRoute.js');
+const authRouter = require('./routes/authRoute');
+const userRouter = require('./routes/userRoute');
 
 class Server {
   constructor() {
@@ -23,6 +24,7 @@ class Server {
   mountRoutes() {
     const router = express.Router();
     router.use('/auth', authRouter.router);
+    router.use('/user', userRouter.router);
     router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
     router.use('/health', (req, res) => res.send({ message: 'ok' }));
 
