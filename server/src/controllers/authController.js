@@ -12,8 +12,7 @@ class AuthController {
       validate.fieldExists(email, 'email');
       validate.fieldExists(password, 'password');
 
-      const result = await userRepository.findByEmail(email);
-      const user = result[0];
+      const user = await userRepository.findByEmail(email);
 
       validate.userExistence(user);
       validate.passwordsMatch(password, user.password);
@@ -33,8 +32,7 @@ class AuthController {
   async register(req, res) {
     const { email, password } = req.body;
     try {
-      const users = await userRepository.findByEmail(email);
-      const user = users[0];
+      const user = await userRepository.findByEmail(email);
 
       validate.fieldExists(email, 'email');
       validate.fieldExists(password, 'password');

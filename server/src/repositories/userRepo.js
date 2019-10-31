@@ -1,8 +1,8 @@
 const sql = require('../services/sql');
 
 class UserRepo {
-  findByEmail(email) {
-    return sql.runQuery(`
+  async findByEmail(email) {
+    const result = await sql.runQuery(`
       SELECT 
         user_id as "userId",
         password,     
@@ -11,10 +11,12 @@ class UserRepo {
       WHERE email = ?;  
     `,
     [email]);
+
+    return result[0];
   }
 
-  findById(userId) {
-    return sql.runQuery(`
+  async findById(userId) {
+    const result = await sql.runQuery(`
       SELECT 
         user_id as "userId",
         email,
@@ -23,25 +25,31 @@ class UserRepo {
       WHERE user_id = ?;  
     `,
     [userId]);
+
+    return result[0];
   }
 
-  updateBudget(userId, budget) {
-    return sql.runQuery(`
+  async updateBudget(userId, budget) {
+    const result = await sql.runQuery(`
       UPDATE user
       SET budget = ?
       WHERE user_id = ?;
     `,
     [budget, userId]);
+
+    return result;
   }
 
-  create(user) {
+  async create(user) {
     const { email, password } = user;
 
-    return sql.runQuery(`
+    const result = await sql.runQuery(`
       INSERT INTO user (email, password) 
       VALUES (?, ?)
     `,
     [email, password]);
+
+    return result;
   }
 }
 

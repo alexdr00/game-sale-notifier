@@ -33,8 +33,8 @@ class GameController {
       const gameFound = await gameRepository.findByIgdbKey(igdbKey);
       let gameId;
 
-      if (gameFound[0]) {
-        gameId = gameFound[0].gameId;
+      if (gameFound) {
+        gameId = gameFound.gameId;
       } else {
         const { price, psnUrl } = await psnCrawler.getGameDetails(name);
 
@@ -48,7 +48,7 @@ class GameController {
       await gameRepository.follow(req.user.userId, gameId);
 
       const message = constants.success.followGame;
-      baseController.handleSuccess(res, null, message);
+      baseController.handleSuccess(res, null, message, 204);
     } catch (error) {
       baseController.handleFailure(res, {
         error,

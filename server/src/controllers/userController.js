@@ -7,8 +7,7 @@ class UserController {
   async findById(req, res) {
     try {
       const { userId } = req.params;
-      const users = await userRepository.findById(userId);
-      const user = users[0];
+      const user = await userRepository.findById(userId);
       let statusCode;
       if (!user) {
         statusCode = 204;
@@ -33,7 +32,7 @@ class UserController {
 
       await userRepository.updateBudget(userId, budget);
       const message = constants.success.updateBudget;
-      baseController.handleSuccess(res, null, message);
+      baseController.handleSuccess(res, null, message, 204);
     } catch (error) {
       baseController.handleFailure(res, {
         error,
