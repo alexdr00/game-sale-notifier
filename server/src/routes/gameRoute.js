@@ -11,6 +11,8 @@ class AuthRouter {
   mountRoutes() {
     this.router.post('/search', requireAuth, gameController.search);
     this.router.post('/follow', requireAuth, gameController.follow);
+    this.router.delete('/unfollow', requireAuth, gameController.unfollow);
+    this.router.patch('/update-price', requireAuth, gameController.updatePrice);
   }
 }
 

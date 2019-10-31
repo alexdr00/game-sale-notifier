@@ -68,6 +68,10 @@ module.exports = {
       name: 'unableToFollowGame',
       body: 'Unable to follow the game.',
     },
+    unableToUnfollowGame: {
+      name: 'unableToUnfollowGame',
+      body: 'Unable to unfollow the game.',
+    },
     gameNotFoundInPsn: {
       name: 'gameNotFoundInPsn',
       body: 'Game not found in PSN: ',
@@ -76,10 +80,16 @@ module.exports = {
       name: 'unableToGetPrice',
       body: 'Unable to get the price for this game directly from PSN.',
     },
+    unableToUpdatePrice: {
+      name: 'unableToUpdatePrice',
+      body: 'Unable update game price.',
+    },
   },
   success: {
     register: 'User registered successfully.',
     updateBudget: 'Budget set successfully.',
     followGame: 'Great! Now your following this game.',
+    unfollowGame: 'Success! You are no longer following this game.',
+    priceUpdated: 'Price updated successfully.',
   },
 };

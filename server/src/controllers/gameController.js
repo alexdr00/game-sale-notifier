@@ -56,6 +56,43 @@ class GameController {
       });
     }
   }
+
+  async unfollow(req, res) {
+    const { followId } = req.body;
+
+    try {
+      validate.fieldExists(followId, 'followId');
+
+      await gameRepository.unFollow(followId);
+      const message = constants.success.unfollowGame;
+      baseController.handleSuccess(res, null, message, 204);
+    } catch (error) {
+      baseController.handleFailure(res, {
+        error,
+        details: constants.error.unableToUnfollowGame,
+      });
+    }
+  }
+
+  async updatePrice(req, res) {
+    const { gameId, price } = req.body;
+
+    try {
+      validate.fieldExists(gameId, 'gameId');
+      validate.fieldExists(price, 'price');
+
+      await gameRepository.updatePrice(gameId, price);
+      await gameRepository.addPriceHistory(gameId, price);
+
+      const message = constants.success.priceUpdated;
+      baseController.handleSuccess(res, null, message, 204);
+    } catch (error) {
+      baseController.handleFailure(res, {
+        error,
+        details: constants.error.unableToUpdatePrice,
+      });
+    }
+  }
 }
 
 module.exports = new GameController();
