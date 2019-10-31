@@ -24,6 +24,10 @@ module.exports = {
       name: 'userAlreadyExists',
       body: 'An user with that email already exists.',
     },
+    unableToGetPriceHistory: {
+      name: 'unableToGetPriceHistory',
+      body: 'Unable to get the history of prices that this game has.',
+    },
     invalidEmail: {
       name: 'invalidEmail',
       body: 'That email is invalid.',
@@ -84,6 +88,18 @@ module.exports = {
       name: 'unableToUpdatePrice',
       body: 'Unable update game price.',
     },
+    unableToMarkAsPurchased: {
+      name: 'unableToMarkAsPurchased',
+      body: 'Unable mark the game as purchased.',
+    },
+    gameAlreadyBeingFollowed: {
+      name: 'gameAlreadyBeingFollowed',
+      body: 'You are already following this game.',
+    },
+    unableToGetGamesFollowed: {
+      name: 'unableToGetGamesFollowed',
+      body: 'Unable to get the games you are following.',
+    },
   },
   success: {
     register: 'User registered successfully.',
@@ -91,5 +107,6 @@ module.exports = {
     followGame: 'Great! Now your following this game.',
     unfollowGame: 'Success! You are no longer following this game.',
     priceUpdated: 'Price updated successfully.',
+    markedAsPurchased: 'This game has been marked as purchased successfully.',
   },
 };

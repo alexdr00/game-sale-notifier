@@ -10,9 +10,12 @@ class AuthRouter {
 
   mountRoutes() {
     this.router.post('/search', requireAuth, gameController.search);
+    this.router.get('/followed', requireAuth, gameController.getGamesFollowedByUser);
     this.router.post('/follow', requireAuth, gameController.follow);
     this.router.delete('/unfollow', requireAuth, gameController.unfollow);
     this.router.patch('/update-price', requireAuth, gameController.updatePrice);
+    this.router.patch('/mark-purchased', requireAuth, gameController.markAsPurchased);
+    this.router.post('/price-history', requireAuth, gameController.getPriceHistory);
   }
 }
 

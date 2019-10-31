@@ -22,6 +22,20 @@ class GameController {
     }
   }
 
+  async getGamesFollowedByUser(req, res) {
+    const { userId } = req.user;
+
+    try {
+      const gamesFollowed = await gameRepository.getGamesFollowedByUser(userId);
+      baseController.handleSuccess(res, gamesFollowed, null);
+    } catch (error) {
+      baseController.handleFailure({
+        error,
+        details: constants.error.unableToGetGamesFollowed,
+      });
+    }
+  }
+
   async follow(req, res) {
     const { igdbKey, name, cover } = req.body;
 
@@ -45,7 +59,9 @@ class GameController {
         gameId = insertedGame.insertId;
       }
 
-      await gameRepository.follow(req.user.userId, gameId);
+      const { userId } = req.user;
+      await validate.isNotBeingFollowedAlready(userId, gameId);
+      await gameRepository.follow(userId, gameId);
 
       const message = constants.success.followGame;
       baseController.handleSuccess(res, null, message, 204);
@@ -74,6 +90,23 @@ class GameController {
     }
   }
 
+  async getPriceHistory(req, res) {
+    const { gameId } = req.body;
+
+    try {
+      validate.fieldExists(gameId, 'gameId');
+
+      const pricesHistory = await gameRepository.getPriceHistory(gameId);
+
+      baseController.handleSuccess(res, pricesHistory, null);
+    } catch (error) {
+      baseController.handleFailure({
+        error,
+        details: constants.error.unableToGetPriceHistory,
+      });
+    }
+  }
+
   async updatePrice(req, res) {
     const { gameId, price } = req.body;
 
@@ -90,6 +123,24 @@ class GameController {
       baseController.handleFailure(res, {
         error,
         details: constants.error.unableToUpdatePrice,
+      });
+    }
+  }
+
+  async markAsPurchased(req, res) {
+    const { followId } = req.body;
+
+    try {
+      validate.fieldExists(followId, 'followId');
+
+      await gameRepository.markAsPurchased(followId);
+      const message = constants.success.markedAsPurchased;
+
+      baseController.handleSuccess(res, null, message, 204);
+    } catch (error) {
+      baseController.handleFailure(res, {
+        error,
+        details: constants.error.unableToMarkAsPurchased,
       });
     }
   }

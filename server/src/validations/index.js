@@ -4,6 +4,9 @@ const passwordSecurity = require('../services/passwordSecurity');
 const emailRegexValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const passwordRegexValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
+const gameRepository = require('../repositories/gameRepo');
+
+
 class Validate {
   userExistence(user) {
     if (!user) {
@@ -72,6 +75,18 @@ class Validate {
     if (Number.isNaN(Number(budget))) {
       const error = {
         message: constants.error.invalidPassword.body,
+        statusCode: 400,
+      };
+      throw error;
+    }
+  }
+
+  async isNotBeingFollowedAlready(userId, gameId) {
+    const gameFollowed = await gameRepository.getFollowed(userId, gameId);
+
+    if (gameFollowed) {
+      const error = {
+        message: constants.error.gameAlreadyBeingFollowed.body,
         statusCode: 400,
       };
       throw error;
