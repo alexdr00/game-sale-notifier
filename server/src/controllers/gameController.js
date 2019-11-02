@@ -1,4 +1,6 @@
 const gameRepository = require('../repositories/gameRepo');
+const priceHistoryRepository = require('../repositories/priceHistoryRepo');
+const followedGameRepository = require('../repositories/followedGameRepo');
 const igdb = require('../services/igdb');
 const baseController = require('./baseController');
 const constants = require('../../consts');
@@ -26,7 +28,7 @@ class GameController {
     const { userId } = req.user;
 
     try {
-      const gamesFollowed = await gameRepository.getGamesFollowedByUser(userId);
+      const gamesFollowed = await followedGameRepository.getGamesFollowedByUser(userId);
       baseController.handleSuccess(res, gamesFollowed, null);
     } catch (error) {
       baseController.handleFailure({
@@ -61,7 +63,7 @@ class GameController {
 
       const { userId } = req.user;
       await validate.isNotBeingFollowedAlready(userId, gameId);
-      await gameRepository.follow(userId, gameId);
+      await followedGameRepository.follow(userId, gameId);
 
       const message = constants.success.followGame;
       baseController.handleSuccess(res, null, message, 204);
@@ -79,7 +81,7 @@ class GameController {
     try {
       validate.fieldExists(followId, 'followId');
 
-      await gameRepository.unFollow(followId);
+      await followedGameRepository.unFollow(followId);
       const message = constants.success.unfollowGame;
       baseController.handleSuccess(res, null, message, 204);
     } catch (error) {
@@ -96,7 +98,7 @@ class GameController {
     try {
       validate.fieldExists(gameId, 'gameId');
 
-      const pricesHistory = await gameRepository.getPriceHistory(gameId);
+      const pricesHistory = await priceHistoryRepository.getPriceHistory(gameId);
 
       baseController.handleSuccess(res, pricesHistory, null);
     } catch (error) {
@@ -115,7 +117,7 @@ class GameController {
       validate.fieldExists(price, 'price');
 
       await gameRepository.updatePrice(gameId, price);
-      await gameRepository.addPriceHistory(gameId, price);
+      await priceHistoryRepository.addPriceHistory(gameId, price);
 
       const message = constants.success.priceUpdated;
       baseController.handleSuccess(res, null, message, 204);
@@ -133,7 +135,7 @@ class GameController {
     try {
       validate.fieldExists(followId, 'followId');
 
-      await gameRepository.markAsPurchased(followId);
+      await followedGameRepository.markAsPurchased(followId);
       const message = constants.success.markedAsPurchased;
 
       baseController.handleSuccess(res, null, message, 204);
