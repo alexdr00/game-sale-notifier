@@ -4,8 +4,7 @@ const passwordSecurity = require('../services/passwordSecurity');
 const emailRegexValidator = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const passwordRegexValidator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
-const gameRepository = require('../repositories/gameRepo');
-
+const followedGameRepository = require('../repositories/followedGameRepo');
 
 class Validate {
   userExistence(user) {
@@ -82,7 +81,7 @@ class Validate {
   }
 
   async isNotBeingFollowedAlready(userId, gameId) {
-    const gameFollowed = await gameRepository.getFollowed(userId, gameId);
+    const gameFollowed = await followedGameRepository.getFollowed(userId, gameId);
 
     if (gameFollowed) {
       const error = {
