@@ -32,13 +32,12 @@ class AuthController {
   async register(req, res) {
     const { email, password } = req.body;
     try {
-      const user = await userRepository.findByEmail(email);
-
       validate.fieldExists(email, 'email');
       validate.fieldExists(password, 'password');
 
-      validate.userUniqueness(user);
+      const user = await userRepository.findByEmail(email);
       validate.emailCorrectness(email);
+      validate.userUniqueness(user);
       validate.passwordStrength(password);
 
       const passwordEncrypted = passwordSecurity.encrypt(password);

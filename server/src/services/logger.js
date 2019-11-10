@@ -17,19 +17,6 @@ const logsPath = `${__dirname}/../../logs`;
 
 const logger = createLogger({
   level: 'info',
-  transports: [
-    new transports.File({
-      filename: `${logsPath}/info.log`,
-      level: 'info',
-    }),
-    new transports.File({
-      filename: `${logsPath}/errors.log`,
-      level: 'error',
-      format: combine(
-        errors({ stack: true }),
-      ),
-    }),
-  ],
   format: combine(
     timestamp({ format: 'YYYY-MMM-D hh:mm:ss:SSS' }),
     metadata(),
@@ -37,12 +24,29 @@ const logger = createLogger({
   ),
 });
 const isProductionEnv = process.env.NODE_ENV === 'production';
+const isTestEnv = process.env.NODE_ENV === 'test';
+
+if (!isTestEnv) {
+  logger.add(new transports.File({
+    filename: `${logsPath}/info.log`,
+    level: 'info',
+  }));
+  logger.add(new transports.File({
+    filename: `${logsPath}/errors.log`,
+    level: 'error',
+    format: combine(
+      errors({ stack: true }),
+    ),
+  }));
+}
+
 if (!isProductionEnv) {
   logger.add(new transports.Console({
     level: 'debug',
     format: combine(
       colorize({ all: true }),
     ),
+    silent: process.env.NODE_ENV === 'test',
   }));
   logger.add(new transports.File({
     filename: `${logsPath}/debug.log`,

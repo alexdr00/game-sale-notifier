@@ -4,9 +4,10 @@
   "description": "Server for game sale notifier app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "start:watch": "node_modules/.bin/nodemon index.js",
+    "test": "./node_modules/.bin/jest",
+    "test:watch": "./node_modules/.bin/jest --watchAll",
     "database:setup": "node -r dotenv/config scripts/setup-database.js"
   },
   "author": "Alexander Dominguez",
@@ -28,6 +29,10 @@
     "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "nodemon": "^1.19.2"
+    "jest": "^24.9.0",
+    "moxios": "^0.4.0",
+    "nodemon": "^1.19.2",
+    "sinon": "^7.5.0",
+    "supertest": "^4.0.2"
   }
 }
