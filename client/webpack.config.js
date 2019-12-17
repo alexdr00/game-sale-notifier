@@ -1,8 +1,9 @@
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -12,7 +13,7 @@ let plugins = [
   }),
   new webpack.HotModuleReplacementPlugin(),
   new Dotenv({
-    safe: true
+    safe: true,
   }),
 ];
 
@@ -25,16 +26,17 @@ if (isProduction) {
       statsFilename: '../coverage/client-bundle-stats.json',
     }),
     new MiniCssExtractPlugin({
-      filename: "bundle.css"
+      filename: 'bundle.css',
     }),
-  ]
+  ];
 } else {
   plugins = [
     ...plugins,
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
     }),
-  ]
+    new ErrorOverlayPlugin(),
+  ];
 }
 
 module.exports = {
@@ -53,27 +55,28 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
           'file-loader',
           {
-            loader: 'image-webpack-loader'
+            loader: 'image-webpack-loader',
           },
         ],
-      }
-    ]
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
   output: {
-    path: __dirname + '/dist',
+    path: `${__dirname}/dist`,
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
+  devtool: 'cheap-module-source-map',
   devServer: {
     contentBase: './dist',
     overlay: true,
@@ -94,6 +97,6 @@ module.exports = {
       errors: true,
       errorDetails: false,
       warnings: false,
-    }
-  }
+    },
+  },
 };
