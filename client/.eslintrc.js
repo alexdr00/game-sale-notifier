@@ -21,5 +21,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'arrow-body-style': "off",
+    'jsx-a11y/click-events-have-key-events': 'off'
   },
 };

@@ -1,0 +1,4 @@
+@function spacing($factor) {
+  $baseFactor: 12;
+  @return ($baseFactor * $factor) * 1px;
+}
