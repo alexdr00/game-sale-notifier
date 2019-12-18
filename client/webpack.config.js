@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
+const globImporter = require('node-sass-glob-importer');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -49,7 +50,14 @@ module.exports = {
         use: [
           isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                importer: globImporter(),
+              },
+            },
+          },
         ],
       },
       {
