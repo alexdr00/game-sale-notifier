@@ -91,6 +91,8 @@ module.exports = {
     hot: true,
     port: 3000,
     open: true,
+    historyApiFallback: true,
+    clientLogLevel: 'none',
     stats: {
       colors: true,
       hash: false,
