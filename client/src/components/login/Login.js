@@ -3,56 +3,56 @@ import { Link } from 'react-router-dom';
 import './LoginStyle.css'
 
 function Login() {
-    const background = { backgroundColor: '#f5f5f5' }
+
 
 return(
     <Fragment>
-        <div>
-            <div className="container">
-                <div className="row justify-content-center animated fadeIn" style={ background } >
-                    <div className="col-xl-10 col-lg-12 col-md-9">
-                        <div className="card o-hidden border-0 shadow-lg my-5">
-                            <div className="card-body p-0">
-                                <div className="row">
-                                    <div className="col-lg-6 d-none d-lg-block bg-login-image">
-                                        <div className="col-lg-6">
-                                            <div className="p-5">
-                                                <div className="text-center">
-                                                    <h1 className="h4 text-gray-900 mb-4">LOGIN</h1>
-                                                </div>
-                                                <form className="user">
-                                                    <div className="form-group">
-                                                        <input type="email" className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email" />
-                                                    </div>
-                                                    <div className="form-group">
-                                                        <input type="password" className="form-control form-control-user" id="exampleInputPassword" placeholder="Password" />
-                                                    </div>
-                                                    <div className="form-group">
-                                                        <div className="custom-control custom-checkbox small">
-                                                            <input type="checkbox" className="custom-control-input" id="customCheck" />
-                                                            <label className="custom-control-label" htmlFor="customCheck">Recuerdame</label>
-                                                        </div>
-                                                    </div>
-                                                    <button className="btn btn-primary btn-user btn-block"> Login </button>
-                                                </form>
-                                                <hr/>
-                                                <div className="text-center">
-                                                    <a className="small" href="/#">Forgot your Password</a>
-                                                </div>
-                                                <div className="text-center">
-                                                    <Link to={"/Register"} className="small" href="/Register">Signup</Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        <div className='container-fluid'>
+            <div className='row' >
+                <div className='col-4 mx-auto mt-5 d-flex align-items-center justify-content-center flex-column shadow-lg'>
+                    <br/>
+                    <h3>LOG IN</h3>
+                    <form action='' >
+                        <div className='form-group'>
+                            <h6>Email</h6>
+                            <input
+                                type='email'
+                                className='form-control'
+                                name='Text'
+                                placeholder='Email'
+                                required/>
                         </div>
-                    </div>
+                        <div className='form-group'>
+                            <h6>Password</h6>
+                            <input
+                                type='password'
+                                className='form-control'
+                                name='password'
+                                placeholder='Password'
+                                required/>
+                        </div>
+                        <div className='text-center'>
+                            <Link
+                                to='/#'
+                                className='d-none'
+                                id='login-redirect'
+                            ></Link>
+                            <button
+                                type='submit'
+                                className='form-control btn btn-primary btn-user btn-block'
+                                name='next'>
+                               Submit
+                            </button>
+                            <br />
+                            <div className="text-center">
+                                <Link to={"/Register"} className="small" href="/Register">Signup</Link>
+                            </div>
+                            <br/>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
 
     </Fragment>
 )
