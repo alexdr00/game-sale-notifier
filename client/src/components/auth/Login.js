@@ -1,8 +1,26 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import { Link } from 'react-router-dom';
-import './LoginStyle.css'
+
 
 function Login() {
+    const [user, saveUser] = useState({
+        email: '',
+        password: '',
+
+    });
+
+    const {email, password}= user;
+
+    const handleChange = e => {
+        saveUser({
+            ...user,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const onSubmit = e =>{
+        e.preventDefault();
+    }
 
 
 return(
@@ -12,7 +30,7 @@ return(
                 <div className='col-4 mx-auto mt-5 d-flex align-items-center justify-content-center flex-column shadow-lg'>
                     <br/>
                     <h3>LOG IN</h3>
-                    <form action='' >
+                    <form onSubmit={onSubmit} >
                         <div className='form-group'>
                             <h6>Email</h6>
                             <input
@@ -20,6 +38,8 @@ return(
                                 className='form-control'
                                 name='Text'
                                 placeholder='Email'
+                                onChange={handleChange}
+                                value={email}
                                 required/>
                         </div>
                         <div className='form-group'>
@@ -29,6 +49,8 @@ return(
                                 className='form-control'
                                 name='password'
                                 placeholder='Password'
+                                onChange={handleChange}
+                                value={password}
                                 required/>
                         </div>
                         <div className='text-center'>

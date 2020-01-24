@@ -1,23 +1,65 @@
-import React, {Fragment} from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function Register() {
+
+    const [user, saveUser] = useState({
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const {email, password, confirmPassword}= user;
+
+    const handleChange = e => {
+        saveUser({
+            ...user,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const onSubmit = e =>{
+        e.preventDefault();
+
+        if( email.trim() === '' || password.trim() === '' || confirmPassword.trim() === ''){
+            Swal.fire({
+                title: 'Error!',
+                text: 'Make sure to fill all fields',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            }).then(r => {
+
+            });
+            return;
+        }
+
+        if(password.length < 6){
+            Swal.fire('That password is not strong enough')
+            return;
+        }
+    }
+
+
+
+
     return(
-        <Fragment>
+        <>
             <div className='container-fluid'>
                 <div className='row' >
                     <div className='col-4 mx-auto mt-5 d-flex align-items-center justify-content-center flex-column shadow-lg'>
                         <br/>
                         <h3>SIGN UP</h3>
-                        <form action='' >
+                        <form  onSubmit={onSubmit}>
                             <div className='form-group'>
                                 <h6>Email</h6>
                                 <input
                                     type='email'
                                     className='form-control'
-                                    name='Text'
+                                    name='email'
                                     placeholder='Email'
-                                    required/>
+                                    onChange={handleChange}
+                                    value={email}/>
                             </div>
                             <div className='form-group'>
                                 <h6>Password</h6>
@@ -26,16 +68,18 @@ function Register() {
                                     className='form-control'
                                     name='password'
                                     placeholder='Password'
-                                    required/>
+                                    onChange={handleChange}
+                                    value={password}/>
                             </div>
                             <div className='form-group'>
                                 <h6>Confirm Password</h6>
                                 <input
-                                    type='passwordConfirm'
+                                    type='password'
                                     className='form-control'
-                                    name='passwordConfirm'
+                                    name='confirmPassword'
                                     placeholder='Confirm Password'
-                                    required/>
+                                    onChange={handleChange}
+                                    value={confirmPassword}/>
                             </div>
                             <div className='text-center'>
                                 <Link
@@ -49,6 +93,9 @@ function Register() {
                                     name='next'>
                                     Submit
                                 </button>
+                                <div className="text-center">
+                                    <Link to={"/Register"} className="small" href="/">Log in</Link>
+                                </div>
                                 <br/>
                             </div>
                         </form>
@@ -56,7 +103,7 @@ function Register() {
                 </div>
             </div>
 
-        </Fragment>
+        </>
     )
 
 }
