@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosFetch = axios.create({
-    baseURL: 'http://localhost:5000/v1'
+    baseURL: process.env.REACT_APP_BACKEND_URL
 });
 
 export default axiosFetch;

@@ -19,10 +19,10 @@ function Register() {
         });
     }
 
-    const onSubmit = e =>{
+    const onSubmit = e => {
         e.preventDefault();
 
-        if( email.trim() === '' || password.trim() === '' || confirmPassword.trim() === ''){
+        if (email.trim() === '' || password.trim() === '' || confirmPassword.trim() === '') {
             Swal.fire({
                 title: 'Error!',
                 text: 'Make sure to fill all fields',
@@ -34,12 +34,23 @@ function Register() {
             return;
         }
 
-        if(password.length < 6){
+        if (password.length < 6) {
             Swal.fire('That password is not strong enough')
             return;
         }
-    }
 
+        if (password !== confirmPassword) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Password do not match',
+                icon: 'error',
+                confirmButtonText: 'Try again'
+            }).then(r => {
+
+            });
+            return;
+        }
+    }
 
 
 
