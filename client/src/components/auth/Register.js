@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
+import axiosFetch from '../../config/axios';
 import Swal from 'sweetalert2';
 
-function Register() {
+function Register({history}) {
 
     const [user, saveUser] = useState({
         email: '',
@@ -50,6 +51,12 @@ function Register() {
             });
             return;
         }
+
+        axiosFetch.post('auth/register', user)
+            .then(res =>{
+                history.push('/')
+
+            });
     }
 
 
