@@ -4,9 +4,13 @@ import Header from './components/Header';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Games from './components/Games/Games';
-
 import AuthState from './context/authState';
+import tokenAuth from './config/token'
 
+const token = localStorage.getItem('token');
+if(token){
+    tokenAuth(token);
+}
 
 
 function App() {
