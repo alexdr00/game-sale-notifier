@@ -1,13 +1,21 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import Swal from 'sweetalert2';
 import AuthContext from '../../context/authContext';
 
 
-function Register() {
+function Register({ history }) {
 
     const authContext = useContext(AuthContext);
-    const { signUp } = authContext;
+    const { authenticate, signUp } = authContext;
+
+    useEffect(()=>{
+        if (authenticate){
+                history.push('/Games')
+        }
+        return;
+
+    }, [ authenticate, history]);
 
     const [user, saveUser] = useState({
         email: '',
@@ -55,7 +63,7 @@ function Register() {
             });
             return;
         }
-                                                                                                        
+
         signUp ({
             email,
             password,

@@ -9,8 +9,16 @@ export default (state, action)=>{
                 authenticate: true,
                 message:null
             }
+        case GET_USER:
+            return {
+                ...state,
+                user:action.payload
+            }
 
+
+        case LOGIN_ERROR:
         case REGISTER_ERROR:
+            localStorage.removeItem('token')
             return {
                 ...state,
                 token: null,
