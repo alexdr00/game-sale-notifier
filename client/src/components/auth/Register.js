@@ -1,9 +1,13 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Link} from "react-router-dom";
-import axiosFetch from '../../config/axios';
 import Swal from 'sweetalert2';
+import AuthContext from '../../context/authContext';
 
-function Register({history}) {
+
+function Register() {
+
+    const authContext = useContext(AuthContext);
+    const { signUp } = authContext;
 
     const [user, saveUser] = useState({
         email: '',
@@ -51,12 +55,13 @@ function Register({history}) {
             });
             return;
         }
+                                                                                                        
+        signUp ({
+            email,
+            password,
+        })
 
-        axiosFetch.post('auth/register', user)
-            .then(res =>{
-                history.push('/')
 
-            });
     }
 
 

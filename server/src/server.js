@@ -1,10 +1,12 @@
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const swaggerConfig = require('../swagger');
 const authRouter = require('./routes/authRoute');
 const userRouter = require('./routes/userRoute');
 const gameRouter = require('./routes/gameRoute');
+
 
 class Server {
   constructor() {
@@ -20,6 +22,7 @@ class Server {
   useMiddleware() {
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(bodyParser.json());
+    this.app.use(cors({ origin: '*' }));
   }
 
   mountRoutes() {
