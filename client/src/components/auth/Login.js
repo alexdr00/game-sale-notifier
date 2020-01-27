@@ -1,9 +1,20 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useContext, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/authContext';
+import Swal from "sweetalert2";
 
 
-function Login() {
+function Login({ history }) {
+    const authContext = useContext(AuthContext);
+    const { authenticate, login } = authContext;
+
+    useEffect(()=>{
+        if (authenticate){
+            history.push('/Games')
+        }
+        return;
+
+    }, [ authenticate, history]);
     const [user, saveUser] = useState({
         email: '',
         password: '',
@@ -21,6 +32,9 @@ function Login() {
 
     const onSubmit = e =>{
         e.preventDefault();
+
+        login({ email, password});
+
     }
 
 
@@ -37,7 +51,7 @@ return(
                             <input
                                 type='email'
                                 className='form-control'
-                                name='Text'
+                                name='email'
                                 placeholder='Email'
                                 onChange={handleChange}
                                 value={email}

@@ -26,7 +26,7 @@ const AuthState = ({children}) =>{
                 type: SUCCESSFUL_REGISTER,
                 payload: response.data
             })
-           // await userAuthenticate();
+            await userAuthenticate();
         }catch (error) {
             const alert = await Swal.fire({
                 text: error.response.data.error
@@ -38,11 +38,10 @@ const AuthState = ({children}) =>{
         }
     }
 
-   /* const userAuthenticate = async () =>{
+    const userAuthenticate = async () =>{
         const token = localStorage.getItem('token');
         if (token){
             tokenAuth(token)
-
         }
         try{
             const response = await axiosFetch.get('/auth/:userId');
@@ -57,13 +56,17 @@ const AuthState = ({children}) =>{
             })
         }
 
-    }*/
+    }
 
    const login = async information => {
        try{
            const response = await axiosFetch.post('/auth/login', information);
-           console.log(response)
+           dispatch({
+               type:SUCCESSFUL_LOGIN,
+               payload: response.data
+           });
 
+           //await userAuthenticate();
        }catch (error) {
            const alert = await Swal.fire({
                text: error.response.data.error

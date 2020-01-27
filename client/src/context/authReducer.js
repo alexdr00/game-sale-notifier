@@ -3,6 +3,7 @@ import {SUCCESSFUL_REGISTER, REGISTER_ERROR, GET_USER, SUCCESSFUL_LOGIN, LOGIN_E
 export default (state, action)=>{
     switch (action.type) {
         case SUCCESSFUL_REGISTER:
+        case SUCCESSFUL_LOGIN:
             localStorage.setItem('token', action.payload.token);
             return {
                 ...state,
