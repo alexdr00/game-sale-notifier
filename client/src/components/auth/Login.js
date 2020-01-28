@@ -1,7 +1,7 @@
 import React, {Fragment, useContext, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/authContext';
-import Swal from "sweetalert2";
+
 
 
 function Login({ history }) {

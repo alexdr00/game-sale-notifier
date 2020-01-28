@@ -2,11 +2,14 @@ import React,{ useReducer } from 'react';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 import axiosFetch from '../config/axios';
-import tokenAuth from '../config/token';
+
 import Swal from 'sweetalert2'
+import tokenAuth from '../config/token';
+
 
 
 import {SUCCESSFUL_REGISTER, REGISTER_ERROR, GET_USER, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT} from '../types/index'
+console.log(tokenAuth)
 
 const AuthState = ({children}) =>{
     const initialState = {
@@ -41,7 +44,7 @@ const AuthState = ({children}) =>{
     const userAuthenticate = async () =>{
         const token = localStorage.getItem('token');
         if (token){
-            tokenAuth(token)
+            tokenAuth(token);
         }
         try{
             const response = await axiosFetch.get('/auth/:userId');

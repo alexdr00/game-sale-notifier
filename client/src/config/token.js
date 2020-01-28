@@ -1,11 +1,12 @@
-import axiosFetch from './axios';
+import axios from 'axios';
 
 const tokenAuth = token =>{
     if(token){
-        axiosFetch.defaults.headers.common['Authorization'] = token;
+        axios.defaults.headers.common['Authorization'] = token;
     }else{
-        delete axiosFetch.defaults.headers.common['Authorization'];
+        delete axios.defaults.headers.common['Authorization'];
     }
 }
 
-export default tokenAuth();
+
+export default tokenAuth;

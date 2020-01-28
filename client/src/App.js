@@ -8,7 +8,7 @@ import AuthState from './context/authState';
 import tokenAuth from './config/token'
 
 const token = localStorage.getItem('token');
-if(token){
+if(token) {
     tokenAuth(token);
 }
 
