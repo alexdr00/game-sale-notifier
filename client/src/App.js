@@ -23,7 +23,7 @@ function App() {
             <Switch>
               <Route exact path = "/" component ={Login}/>
               <Route exact path = "/Register" component ={Register}/>
-              <SecuredRoutes exact path = "/Games" component = {Games}/>
+              <Route exact path = "/Games" component = {Games}/>
             </Switch>
         </Router>
       </AuthState>
