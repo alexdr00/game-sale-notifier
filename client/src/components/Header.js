@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import AuthContext from '../context/authContext';
 
 function Header() {
+    const authContext = useContext(AuthContext);
+    const {singOut} = authContext
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <a className="navbar-brand" href="/">Game Sale Notifier</a>
@@ -12,13 +15,16 @@ function Header() {
             <div className="collapse navbar-collapse" id="navbarColor02">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <a className="nav-link" href="/">Login <span className="sr-only">(current)</span></a>
+                        <a className="nav-link" href="/">Explore <span className="sr-only">(current)</span></a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/Register">Register</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/Games">Games</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/SingOut" onClick={()=>singOut()}>SingOut</a>
                     </li>
 
                 </ul>

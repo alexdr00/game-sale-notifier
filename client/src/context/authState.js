@@ -9,14 +9,15 @@ import tokenAuth from '../config/token';
 
 
 import {SUCCESSFUL_REGISTER, REGISTER_ERROR, GET_USER, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT} from '../types/index'
-console.log(tokenAuth)
+
 
 const AuthState = ({children}) =>{
     const initialState = {
         token:localStorage.getItem('token'),
         authenticate: null,
         user:null,
-        message:null
+        message:null,
+        loading: true
     }
     const [state, dispatch] = useReducer(AuthReducer, initialState);
 
@@ -47,8 +48,7 @@ const AuthState = ({children}) =>{
             tokenAuth(token);
         }
         try{
-            const response = await axiosFetch.get('/auth/:userId');
-            //console.log(response);
+            const response = await axiosFetch.get('/auth');
             dispatch({
                 type: GET_USER,
                 payload:response.data.user
@@ -69,7 +69,7 @@ const AuthState = ({children}) =>{
                payload: response.data
            });
 
-           //await userAuthenticate();
+           await userAuthenticate();
        }catch (error) {
            const alert = await Swal.fire({
                text: error.response.data.error
@@ -81,6 +81,12 @@ const AuthState = ({children}) =>{
        }
    }
 
+   const singOut = ()=>{
+        dispatch({
+            type:SIGN_OUT
+        })
+   }
+
 
 
     return(
@@ -90,9 +96,12 @@ const AuthState = ({children}) =>{
                 authenticate: state.authenticate,
                 user: state.user,
                 message: state.message,
+                loading: state.loading,
                 signUp,
                 login,
                 userAuthenticate,
+                singOut,
+
             }}
         >{children}
 

@@ -1,4 +1,3 @@
-
 export const SUCCESSFUL_REGISTER= 'SUCCESSFUL_REGISTER';
 export const REGISTER_ERROR = 'REGISTER_ERROR';
 export const GET_USER = 'GET_USER';

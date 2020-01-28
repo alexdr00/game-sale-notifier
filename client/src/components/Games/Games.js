@@ -8,7 +8,7 @@ function Games() {
 
     useEffect(()=>{
         userAuthenticate();
-    }, [])
+    })
     return(
         <h1>Hi, Im the game component</h1>
 

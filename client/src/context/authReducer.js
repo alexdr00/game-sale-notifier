@@ -8,22 +8,27 @@ export default (state, action)=>{
             return {
                 ...state,
                 authenticate: true,
-                message:null
+                message:null,
+                loading: false
             }
         case GET_USER:
             return {
                 ...state,
-                user:action.payload
+                authenticate: true,
+                user:action.payload,
+                loading: false
             }
-
-
+        case SIGN_OUT:
         case LOGIN_ERROR:
         case REGISTER_ERROR:
             localStorage.removeItem('token')
             return {
                 ...state,
                 token: null,
-                message: action.payload
+                user: null,
+                authenticate: null,
+                message: action.payload,
+                loading: false
             }
 
         default:

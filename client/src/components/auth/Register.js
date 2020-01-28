@@ -125,7 +125,7 @@ function Register({ history }) {
                                     Submit
                                 </button>
                                 <div className="text-center">
-                                    <Link to={"/Register"} className="small" href="/">Log in</Link>
+                                    <Link to={"/"} className="small" href="/">Log in</Link>
                                 </div>
                                 <br/>
                             </div>
