@@ -1,19 +1,9 @@
-import React, {useContext, useEffect} from 'react';
-import AuthContext from '../../context/authContext';
-
+import React from 'react';
 
 function Games() {
-    const  authContext = useContext(AuthContext);
-    const {  userAuthenticate } = authContext;
+  return (
+    <h1>Hi, Im the game component</h1>
+  )
+};
 
-    useEffect(()=>{
-        //userAuthenticate();
-    })
-    return(
-        <h1>Hi, Im the game component</h1>
-
-    )
-
-}
-
-export default Games
+export default Games;
