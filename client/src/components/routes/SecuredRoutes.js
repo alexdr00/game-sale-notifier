@@ -6,7 +6,7 @@ function SecuredRoutes({ protect, ...props }) {
   const authContext = useContext(AuthContext);
   const { token } = authContext;
 
-  const isAuthenticated = token ;
+  const isAuthenticated = token;
 
   if (protect) {
     if (isAuthenticated) {

@@ -112,7 +112,7 @@ function Register() {
                   Submit
                 </button>
                 <div className="text-center">
-                  <Link to={"/"} className="small" href="/">Log in</Link>
+                  <Link to={"/Login"} className="small" href="/Login">Log in</Link>
                 </div>
                 <br/>
               </div>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Header from './components/Header';
+import Header from './components/layout/Header';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Games from './components/Games/Games';
+import Explore from './components/Games/Explore';
 import AuthState from './context/authState';
 import tokenAuth from './config/token';
 import SecuredRoutes from './components/routes/SecuredRoutes';
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/Login" component={Login}/>
           <Route exact path="/Register" component={Register}/>
           <SecuredRoutes protect exact path="/Games" component={Games}/>
+          <SecuredRoutes protect exact path ="/Explore" component={Explore}/>
         </Switch>
       </Router>
     </AuthState>
