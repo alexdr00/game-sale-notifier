@@ -14,8 +14,11 @@ function Header() {
 
       <div className="collapse navbar-collapse" id="navbarColor02">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="/">Explore <span className="sr-only">(current)</span></a>
+          <li className="nav-item ">
+            <a className="nav-link" href="/"> Explore </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="/login">Login</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/Register">Register</a>
@@ -24,7 +27,7 @@ function Header() {
             <a className="nav-link" href="/Games">Games</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/SignOut" onClick={() => signOut()}>SingOut</a>
+            <a className="nav-link" href="/SignOut" onClick={() => signOut()}>SignOut</a>
           </li>
 
         </ul>

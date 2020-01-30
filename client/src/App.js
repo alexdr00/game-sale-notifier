@@ -6,6 +6,7 @@ import Register from './components/auth/Register';
 import Games from './components/Games/Games';
 import AuthState from './context/authState';
 import tokenAuth from './config/token';
+import SecuredRoutes from './components/routes/SecuredRoutes';
 
 const setTokenAuth = localStorage.getItem('token');
 if (setTokenAuth) {
@@ -19,9 +20,9 @@ function App() {
       <Router>
         <Header/>
         <Switch>
-          <Route exact path="/" component={Login}/>
+          <Route exact path="/Login" component={Login}/>
           <Route exact path="/Register" component={Register}/>
-          <Route exact path="/Games" component={Games}/>
+          <SecuredRoutes protect exact path="/Games" component={Games}/>
         </Switch>
       </Router>
     </AuthState>

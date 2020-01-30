@@ -1,17 +1,12 @@
-import React, {  useContext, useEffect, useState } from 'react';
+import React, {  useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/authContext';
 
-function Login({ history }) {
+function Login() {
   const authContext = useContext(AuthContext);
-  const { authenticate, login } = authContext;
+  const {  login } = authContext;
 
-  useEffect(() => {
-    if (authenticate) {
-      history.push('/Games')
-    }
-    return;
-  }, [authenticate, history]);
+
   const [user, saveUser] = useState({
     email: '',
     password: '',
@@ -25,11 +20,14 @@ function Login({ history }) {
       ...user,
       [e.target.name]: e.target.value
     });
+
   }
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
+
     e.preventDefault();
     login({ email, password });
+
   }
 
   return (
@@ -39,7 +37,7 @@ function Login({ history }) {
           <div className='col-4 mx-auto mt-5 d-flex align-items-center justify-content-center flex-column shadow-lg'>
             <br/>
             <h3>LOG IN</h3>
-            <form onSubmit={onSubmit}>
+            <form >
               <div className='form-group'>
                 <h6>Email</h6>
                 <input
@@ -68,7 +66,7 @@ function Login({ history }) {
                   className='d-none'
                   id='login-redirect'
                 ></Link>
-                <button
+                <button onClick={ onSubmit}
                   type='submit'
                   className='form-control btn btn-primary btn-user btn-block'
                   name='next'>

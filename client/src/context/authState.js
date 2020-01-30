@@ -5,19 +5,18 @@ import axiosFetch from '../config/axios';
 import Swal from 'sweetalert2';
 import { SUCCESSFUL_REGISTER, REGISTER_ERROR, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT } from '../types/index';
 
-const AuthState = ({ children }) => {
+const AuthState = ({ children, history }) => {
   const initialState = {
     token: localStorage.getItem('token'),
     authenticate: null,
-    user: null,
     message: null,
     loading: true
   };
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-  const signUp = async information => {
+  const signUp = async data => {
     try {
-      const response = await axiosFetch.post('/auth/register', information);
+      const response = await axiosFetch.post('/auth/register', data);
       console.log(response.data);
 
       dispatch({
@@ -38,10 +37,12 @@ const AuthState = ({ children }) => {
   const login = async information => {
     try {
       const response = await axiosFetch.post('/auth/login', information);
+
       dispatch({
         type: SUCCESSFUL_LOGIN,
         payload: response.data
       });
+
     } catch (error) {
       const alert = await Swal.fire({
         text: error.response.data.error
@@ -64,7 +65,6 @@ const AuthState = ({ children }) => {
       value={{
         token: state.token,
         authenticate: state.authenticate,
-        user: state.user,
         message: state.message,
         loading: state.loading,
         signUp,

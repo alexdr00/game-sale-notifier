@@ -1,23 +1,41 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import AuthContext from '../../context/authContext';
 
-function SecuredRoutes({ component: Component, ...props }) {
+function SecuredRoutes({ protect, ...props }) {
   const authContext = useContext(AuthContext);
-  const { authenticate, loading, userAuthenticate } = authContext;
+  const { token } = authContext;
 
-  useEffect(() => {
-    userAuthenticate();
-  },)
+  const isAuthenticated = token ;
 
-  return (
-    <Route {...props} render={props => !authenticate && !loading ? (
-      <Redirect to="/"/>
-    ) : (
-      <Component {...props} />
-    )}
-    />
-  );
+  if (protect) {
+    if (isAuthenticated) {
+      return (< Route {...props}/>
+      )
+    }
+    return (
+      <Redirect
+        to={{
+          pathname: '/login',
+        }}
+      />
+    );
+  }
+
+  if (isAuthenticated()) {
+    if (props.path === '/login') {
+      return (
+        <Redirect
+          to={{
+            pathname: '/Games'
+          }}
+        />
+      );
+    }
+  }
+  return <Route {...props} />;
+
+
 }
 
 export default SecuredRoutes;

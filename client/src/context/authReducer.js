@@ -1,4 +1,4 @@
-import { SUCCESSFUL_REGISTER, REGISTER_ERROR, GET_USER, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT } from '../types/index'
+import { SUCCESSFUL_REGISTER, REGISTER_ERROR, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT } from '../types/index'
 
 export default (state, action) => {
   switch (action.type) {
@@ -11,13 +11,7 @@ export default (state, action) => {
         message: null,
         loading: false
       }
-    case GET_USER:
-      return {
-        ...state,
-        authenticate: true,
-        user: action.payload,
-        loading: false
-      }
+
     case SIGN_OUT:
     case LOGIN_ERROR:
     case REGISTER_ERROR:
@@ -25,7 +19,6 @@ export default (state, action) => {
       return {
         ...state,
         token: null,
-        user: null,
         authenticate: null,
         message: action.payload,
         loading: false
