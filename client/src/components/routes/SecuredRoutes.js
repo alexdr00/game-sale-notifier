@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import AuthContext from '../../context/authContext';
+import AuthContext from '../../context/auth/authContext';
 
 function SecuredRoutes({ protect, ...props }) {
   const authContext = useContext(AuthContext);

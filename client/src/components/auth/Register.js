@@ -1,13 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
-import AuthContext from '../../context/authContext';
+import AuthContext from '../../context/auth/authContext';
 
 function Register() {
   const authContext = useContext(AuthContext);
   const { signUp } = authContext;
-
-
   const [user, saveUser] = useState({
     email: '',
     password: '',

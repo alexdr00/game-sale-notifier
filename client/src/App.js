@@ -5,7 +5,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Games from './components/Games/Games';
 import Explore from './components/Games/Explore';
-import AuthState from './context/authState';
+import AuthState from './context/auth/authState';
 import tokenAuth from './config/token';
 import SecuredRoutes from './components/routes/SecuredRoutes';
 

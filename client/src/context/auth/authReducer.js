@@ -1,4 +1,4 @@
-import { SUCCESSFUL_REGISTER, REGISTER_ERROR, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT } from '../types/index'
+import { SUCCESSFUL_REGISTER, REGISTER_ERROR, SUCCESSFUL_LOGIN, LOGIN_ERROR, SIGN_OUT } from '../../types'
 
 export default (state, action) => {
   switch (action.type) {
