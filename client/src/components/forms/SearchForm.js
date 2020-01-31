@@ -1,11 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import useDebounce from '../../utils/useDebounce';
+import axiosFetch from "../../config/axios";
+import tokenAuth from "../../config/token";
 
 
 function SearchForm({ saveSearch }) {
 
-  const [game, saveGame] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
 
-  saveSearch(game)
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+      if (debouncedSearchTerm) {
+        setIsSearching(true)
+        searchCharacters(debouncedSearchTerm).then(results => {
+          setIsSearching(false)
+          setResults(results)
+        });
+
+      } else {
+        setResults([]);
+      }
+    },
+    [debouncedSearchTerm]
+  );
+  saveSearch(searchTerm)
+
+  function searchCharacters(data) {
+    const tokenAuth = localStorage.getItem('token');
+    return axiosFetch.post(`/game/search`, data,  { headers: {'Authorization': tokenAuth } })
+      .then(r => r.json())
+      .then(r => r.data.results)
+      .catch(error => {
+        console.log(error);
+        return [];
+      })
+  }
 
   return (
     <form className="col-12">
@@ -19,17 +51,16 @@ function SearchForm({ saveSearch }) {
             className="form-control"
             type="text"
             placeholder="Insert the name of the game"
-            onChange={e => saveGame(e.target.value)}
+            onChange={e => setSearchTerm(e.target.value)}
           />
+          {isSearching && <div>Searching ...</div>}
+          {results.map(result => (
+            <div key={result.game_id}>
+              <h4>{result.game_name}</h4>
+              <img alt>{result.cover_url}</img>
+            </div>
+          ))}
         </div>
-        <div className="col-md-4">
-          <input
-            type="submit"
-            className="btn btn-block btn-primary"
-            value="Search game "
-          />
-        </div>
-
       </div>
     </form>
   )
