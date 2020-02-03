@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useDebounce from '../../utils/useDebounce';
 import axiosFetch from "../../config/axios";
-import tokenAuth from "../../config/token";
-
 
 function SearchForm({ saveSearch }) {
 
@@ -12,32 +10,39 @@ function SearchForm({ saveSearch }) {
 
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  useEffect(() => {
-      if (debouncedSearchTerm) {
-        setIsSearching(true)
-        searchCharacters(debouncedSearchTerm).then(results => {
-          setIsSearching(false)
-          setResults(results)
-        });
 
-      } else {
-        setResults([]);
+  async function searchCharacters() {
+    try {
+      const query = {}
+      const tokenAuth = localStorage.getItem('token');
+      const results = await axiosFetch.post(`/game/search`, { query }, { headers: { 'Authorization': tokenAuth } })
+      console.log(results.data.data)
+
+      return results.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+      try {
+        if (debouncedSearchTerm) {
+          setIsSearching(true)
+          searchCharacters(debouncedSearchTerm).then(results => {
+            console.log(results)
+            setIsSearching(false)
+            setResults(results.data)
+          });
+        } else {
+          setResults([]);
+        }
+      } catch (error) {
+        console.log(error)
       }
     },
     [debouncedSearchTerm]
   );
   saveSearch(searchTerm)
-
-  function searchCharacters(data) {
-    const tokenAuth = localStorage.getItem('token');
-    return axiosFetch.post(`/game/search`, data,  { headers: {'Authorization': tokenAuth } })
-      .then(r => r.json())
-      .then(r => r.data.results)
-      .catch(error => {
-        console.log(error);
-        return [];
-      })
-  }
 
   return (
     <form className="col-12">
@@ -55,9 +60,9 @@ function SearchForm({ saveSearch }) {
           />
           {isSearching && <div>Searching ...</div>}
           {results.map(result => (
-            <div key={result.game_id}>
-              <h4>{result.game_name}</h4>
-              <img alt>{result.cover_url}</img>
+            <div key={result.igdbKey}>
+              <h4>{result.name}</h4>
+              <img alt="Games">{result.cover_url}</img>
             </div>
           ))}
         </div>
@@ -65,6 +70,8 @@ function SearchForm({ saveSearch }) {
     </form>
   )
 
+
 }
+
 
 export default SearchForm;
