@@ -19,18 +19,24 @@ h1 {
   text-align: center;
   font-size: 3rem;
 }
-
-.card img {
-  width: 100%;
-  margin-bottom: 1rem;
+.img{
+  height:100px;
+  display: inline-block;
 }
+
+.card{
+  position: relative;
+  display: inline-block;
+}
+
+.div {
+  display: inline-block;
+}
+
 h2 {
   margin-bottom: 2rem;
   font-family: 'Work Sans', sans-serif;
   border-bottom: 3px solid #EB6864;
   padding-bottom:10px;
 }
-.card-body i {
-  font-size: 3rem;
-  margin-right: 3rem;
-}
+

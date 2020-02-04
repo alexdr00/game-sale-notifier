@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import SearchForm from '../forms/SearchForm';
 
-
 function Games() {
   const [search, saveSearch] = useState('');
+  const [results, saveResults] = useState();
 
-  useEffect(()=>{
-    if(Object.keys(search).length === 0) return;
-  }, [search])
 
+  useEffect(() => {
+    if (Object.keys(search).length === 0) return;
+  }, [search, results])
 
   return (
     <>
-      <div className="container mt-5">
-        <div className="row">
-          <SearchForm
-            saveSearch={saveSearch}
-          />
-        </div>
-      </div>
+
+        <SearchForm
+          saveSearch={saveSearch}
+          saveResults={saveResults}>
+        </SearchForm>
 
     </>
-
-  )
-};
+  )};
 
 export default Games;

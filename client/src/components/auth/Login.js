@@ -1,9 +1,10 @@
 import React, {  useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 
 function Login() {
   const authContext = useContext(AuthContext);
+  const history = useHistory();
   const {  login } = authContext;
 
 
@@ -23,11 +24,15 @@ function Login() {
 
   }
 
-  const onSubmit = (e) => {
 
+  const onSubmit =  (e) => {
     e.preventDefault();
-    login({ email, password });
-
+    try{
+      login({ email, password });
+      history.push('/Games')
+    }catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -61,11 +66,6 @@ function Login() {
                   required/>
               </div>
               <div className='text-center'>
-                <Link
-                  to='/#'
-                  className='d-none'
-                  id='login-redirect'
-                ></Link>
                 <button onClick={ onSubmit}
                   type='submit'
                   className='form-control btn btn-primary btn-user btn-block'

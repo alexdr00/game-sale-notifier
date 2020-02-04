@@ -38,6 +38,7 @@ const AuthState = ({ children }) => {
     try {
       const response = await axiosFetch.post('/auth/login', information);
 
+
       dispatch({
         type: SUCCESSFUL_LOGIN,
         payload: response.data

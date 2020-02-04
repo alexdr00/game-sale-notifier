@@ -8,6 +8,7 @@ function SecuredRoutes({ protect, ...props }) {
 
   const isAuthenticated = token;
 
+
   if (protect) {
     if (isAuthenticated) {
       return (< Route {...props}/>
@@ -21,8 +22,8 @@ function SecuredRoutes({ protect, ...props }) {
       />
     );
   }
+  if (isAuthenticated) {
 
-  if (isAuthenticated()) {
     if (props.path === '/login') {
       return (
         <Redirect
