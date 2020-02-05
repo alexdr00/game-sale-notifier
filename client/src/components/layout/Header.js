@@ -12,24 +12,22 @@ function Header() {
               aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
-
-
       <div className="collapse navbar-collapse" id="navbarColor02">
         <Navigation/>
         <ul className="nav navbar-nav navbar-right">
-        {token ?(
-          <li className="nav-item">
-            <a className="nav-link" href="/SignOut" onClick={() => signOut()}>SignOut</a>
-          </li>
-        ) : (
-          <li className="nav-item">
-            <a className="nav-link" href="/Login">Login</a>
-          </li>
-        )}
-          </ul>
+          {token ? (
+            <li className="nav-item">
+              <a className="nav-link" href="/SignOut" onClick={() => signOut()}>SignOut</a>
+            </li>
+          ) : (
+            <li className="nav-item">
+              <a className="nav-link" href="/Login">Login</a>
+            </li>
+          )}
+        </ul>
       </div>
     </nav>
   )
-}
+};
 
 export default Header;

@@ -1,19 +1,17 @@
-import React, {  useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 
 function Login() {
   const authContext = useContext(AuthContext);
   const history = useHistory();
-  const {  login } = authContext;
-
+  const { login } = authContext;
 
   const [user, saveUser] = useState({
     email: '',
     password: '',
 
   })
-
   const { email, password } = user;
 
   const handleChange = e => {
@@ -24,13 +22,12 @@ function Login() {
 
   }
 
-
-  const onSubmit =  (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    try{
+    try {
       login({ email, password });
       history.push('/Games')
-    }catch (error) {
+    } catch (error) {
       console.log(error)
     }
   }
@@ -42,7 +39,7 @@ function Login() {
           <div className='col-4 mx-auto mt-5 d-flex align-items-center justify-content-center flex-column shadow-lg'>
             <br/>
             <h3>LOG IN</h3>
-            <form >
+            <form>
               <div className='form-group'>
                 <h6>Email</h6>
                 <input
@@ -66,10 +63,10 @@ function Login() {
                   required/>
               </div>
               <div className='text-center'>
-                <button onClick={ onSubmit}
-                  type='submit'
-                  className='form-control btn btn-primary btn-user btn-block'
-                  name='next'>
+                <button onClick={onSubmit}
+                        type='submit'
+                        className='form-control btn btn-primary btn-user btn-block'
+                        name='next'>
                   Submit
                 </button>
                 <br/>
@@ -82,9 +79,8 @@ function Login() {
           </div>
         </div>
       </div>
-
     </>
   )
-}
+};
 
 export default Login;

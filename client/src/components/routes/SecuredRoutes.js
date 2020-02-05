@@ -5,15 +5,13 @@ import AuthContext from '../../context/auth/authContext';
 function SecuredRoutes({ protect, ...props }) {
   const authContext = useContext(AuthContext);
   const { token } = authContext;
-
   const isAuthenticated = token;
-
 
   if (protect) {
     if (isAuthenticated) {
       return (< Route {...props}/>
-      )
-    }
+      )}
+
     return (
       <Redirect
         to={{
@@ -23,7 +21,6 @@ function SecuredRoutes({ protect, ...props }) {
     );
   }
   if (isAuthenticated) {
-
     if (props.path === '/login') {
       return (
         <Redirect
@@ -35,8 +32,6 @@ function SecuredRoutes({ protect, ...props }) {
     }
   }
   return <Route {...props} />;
-
-
 }
 
 export default SecuredRoutes;

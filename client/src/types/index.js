@@ -1,6 +1,5 @@
 export const SUCCESSFUL_REGISTER = 'SUCCESSFUL_REGISTER';
 export const REGISTER_ERROR = 'REGISTER_ERROR';
-export const GET_USER = 'GET_USER';
 export const SUCCESSFUL_LOGIN = 'SUCCESSFUL_LOGIN';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const SIGN_OUT = 'SIGN_OUT ';

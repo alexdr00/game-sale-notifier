@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import AuthContext from '../../context/auth/authContext';
 
-
 function Navigation() {
   const authContext = useContext(AuthContext);
-  const { authenticate} = authContext
+  const { authenticate } = authContext
 
   return (
     <>
-      { authenticate &&
+      {authenticate &&
       <ul className="navbar-nav mr-auto">
         <li className="nav-item ">
           <a className="nav-link" href="/Explore"> Explore </a>

@@ -55,8 +55,6 @@ function Register() {
       email,
       password,
     })
-
-
   }
 
   return (
@@ -98,11 +96,6 @@ function Register() {
                   value={confirmPassword}/>
               </div>
               <div className='text-center'>
-                <Link
-                  to='/#'
-                  className='d-none'
-                  id='login-redirect'
-                ></Link>
                 <button
                   type='submit'
                   className='form-control btn btn-primary btn-user btn-block'
@@ -120,7 +113,6 @@ function Register() {
       </div>
     </>
   )
-
-}
+};
 
 export default Register;

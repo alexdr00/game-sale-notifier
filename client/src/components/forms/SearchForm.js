@@ -3,20 +3,16 @@ import useDebounce from '../../utils/useDebounce';
 import axiosFetch from "../../config/axios";
 
 function SearchForm({ saveSearch, saveResults }) {
-
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
-
 
   async function searchCharacters() {
     try {
       const query = {}
       const tokenAuth = localStorage.getItem('token');
       const results = await axiosFetch.post(`/game/search`, { query }, { headers: { 'Authorization': tokenAuth } })
-      console.log(results.data.data)
 
       return results.data
     } catch (error) {
@@ -29,10 +25,9 @@ function SearchForm({ saveSearch, saveResults }) {
         if (debouncedSearchTerm && debouncedSearchTerm) {
           setIsSearching(true)
           searchCharacters(debouncedSearchTerm).then(results => {
-            console.log(results)
             setIsSearching(false)
             setResults(results.data)
-          });
+          })
         } else {
           setResults([]);
         }
@@ -42,7 +37,6 @@ function SearchForm({ saveSearch, saveResults }) {
     },
     [debouncedSearchTerm]
   );
-
   saveSearch(searchTerm)
   saveResults(results)
 
@@ -66,7 +60,6 @@ function SearchForm({ saveSearch, saveResults }) {
             </div>
           </div>
         </div>
-      </form>
       {results.map(result => (
         <div className="text-center">
           <div className="cover-container d-flex w-100 p-3 mx-auto flex-column">
@@ -91,8 +84,9 @@ function SearchForm({ saveSearch, saveResults }) {
           </div>
         </div>
       ))}
+      </form>
     </>
   )
-}
+};
 
 export default SearchForm;
